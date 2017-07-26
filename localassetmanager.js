@@ -1,4 +1,17 @@
-﻿define(['filerepository', 'itemrepository', 'useractionrepository', 'transfermanager', 'cryptojs-md5'], function (filerepository, itemrepository, useractionrepository, transfermanager) {
+﻿(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['filerepository', 'itemrepository', 'useractionrepository', 'transfermanager', 'cryptojs-md5'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory(require('./sync/filerepository'), require('./sync/itemrepository'), require('useractionrepository'), require('transfermanager'), require('cryptojs-md5'));
+    } else {
+        // Browser globals (root is window)
+        root.localassetmanager = factory(root.filerepository, root.itemrepository, root.useractionrepository, root.b, root.transfermanager);
+    }
+}(this, function (filerepository, itemrepository, useractionrepository, transfermanager) {
     'use strict';
 
     function getLocalItem(serverId, itemId) {
@@ -746,5 +759,5 @@
         getItemsFromIds: getItemsFromIds,
         removeObsoleteContainerItems: removeObsoleteContainerItems,
         fileExists: fileExists
-    };
-});
+    }
+}));

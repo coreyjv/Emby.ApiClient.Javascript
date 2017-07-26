@@ -1,4 +1,18 @@
-﻿define(['filerepository'], function (filerepository) {
+﻿
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['filerepository'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory(require('./filerepository'));
+    } else {
+        // Browser globals (root is window)
+        root.transfermanager = factory(root.filerepository);
+    }
+}(this, function (filerepository) {
     'use strict';
 
     function downloadFile(url, folderName, localPath) {
@@ -20,4 +34,4 @@
         downloadSubtitles: downloadSubtitles,
         downloadImage: downloadImage
     };
-});
+}));

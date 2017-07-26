@@ -1,4 +1,18 @@
-﻿define(['events', 'apiclient', 'appStorage'], function (events, apiClientFactory, appStorage) {
+﻿
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['events', 'apiclient', 'appStorage'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory(require('./events'), require('./apiclient'), require('appStorage'));
+    } else {
+        // Browser globals (root is window)
+        root.returnExports = factory(root.events, root.apiclient, root.appStorage);
+    }
+}(this, function (events, apiClientFactory, appStorage) {
     'use strict';
 
     var defaultTimeout = 20000;
@@ -1711,4 +1725,4 @@
         ServerInfo: ServerInfo,
         ConnectionManager: ConnectionManager
     };
-});
+}));

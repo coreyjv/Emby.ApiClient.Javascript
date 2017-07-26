@@ -1,4 +1,17 @@
-﻿define(['idb'], function () {
+﻿(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['idb'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory(require('idb'));
+    } else {
+        // Browser globals (root is window)
+        root.itemrepository = factory(root.idb);
+    }
+}(this, function (idb) {
     'use strict';
 
     // Database version
@@ -122,4 +135,4 @@
         getAll: getAll,
         getServerItemTypes: getServerItemTypes
     };
-});
+}));

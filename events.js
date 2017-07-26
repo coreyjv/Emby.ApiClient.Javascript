@@ -1,4 +1,12 @@
-﻿define([], function () {
+﻿(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        module.exports = factory();
+    } else {
+        root.events = factory();
+  }
+}(this, function () {
     'use strict';
 
     function getCallbacks(obj, name) {
@@ -59,4 +67,4 @@
             });
         }
     };
-});
+}));

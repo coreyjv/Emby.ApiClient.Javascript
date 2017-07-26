@@ -1,4 +1,18 @@
-﻿define(['events', 'appStorage'], function (events, appStorage) {
+﻿
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['events', 'appStorage'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory(require('./events'), require('./appstorage'));
+    } else {
+        // Browser globals (root is window)
+        root.returnExports = factory(root.events, root.appStorage);
+    }
+}(this, function (events, appStorage) {
     'use strict';
 
     function redetectBitrate(instance) {
@@ -3864,4 +3878,4 @@
     };
 
     return ApiClient;
-});
+}));
