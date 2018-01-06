@@ -1,0 +1,19 @@
+{
+  "name": "emby-apiclient",
+  "version": "2.0.0",
+  "description": "ApiClient allows JavaScript apps to easily access the Emby API",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MediaBrowser/Emby.ApiClient.Javascript.git"
+  },
+  "author": "The Emby Authors",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "homepage": "https://github.com/MediaBrowser/Emby.ApiClient.Javascript",
+  "devDependencies": {
+    "crypto-js": "^3.1.9-1"
+  }
+}
